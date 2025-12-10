@@ -1,0 +1,1233 @@
+#include <stdio.h>
+
+int main() {
+    char input[1000];
+
+    // Read a line of text (including spaces)
+    fgets(input, sizeof(input), stdin);
+
+    // Print output
+    printf("Hello, World!\n");
+    printf("%s", input);
+
+    return 0;
+}
+
+
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    char c;
+    char str[100];
+    char sentence[100];
+
+    // Read a character
+    scanf("%c", &c);
+
+    // Read a string (one word)
+    scanf("%s", str);
+
+    // Clear the newline left in the buffer
+    getchar();
+
+    // Read a full sentence (with spaces)
+    fgets(sentence, sizeof(sentence), stdin);
+
+    // Output
+    printf("%c\n", c);
+    printf("%s\n", str);
+    printf("%s", sentence);
+
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int a, b;
+    float x, y;
+
+    // Read two integers
+    scanf("%d %d", &a, &b);
+
+    // Read two floats
+    scanf("%f %f", &x, &y);
+
+    // Print integer sum and difference
+    printf("%d %d\n", a + b, a - b);
+
+    // Print float sum and difference (1 decimal place)
+    printf("%.1f %.1f\n", x + y, x - y);
+
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int a, b, c, d;
+
+    scanf("%d", &a);
+    scanf("%d", &b);
+    scanf("%d", &c);
+    scanf("%d", &d);
+
+    int max = a;
+
+    if (b > max) max = b;
+    if (c > max) max = c;
+    if (d > max) max = d;
+
+    printf("%d", max);
+
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h> // for abs()
+
+// Function to modify the two integers in place
+void modify(int *a, int *b) {
+    int original_a = *a;
+    int original_b = *b;
+
+    *a = original_a + original_b;       // first number = sum
+    *b = abs(original_a - original_b);  // second number = absolute difference
+}
+
+
+
+
+
+int main() {
+    int a, b;
+    
+    // Read input
+    scanf("%d", &a);
+    scanf("%d", &b);
+    
+    // Modify values
+    modify(&a, &b);
+    
+    // Print output
+    printf("%d\n%d\n", a, b);
+    
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    if (n == 1) printf("one");
+    else if (n == 2) printf("two");
+    else if (n == 3) printf("three");
+    else if (n == 4) printf("four");
+    else if (n == 5) printf("five");
+    else if (n == 6) printf("six");
+    else if (n == 7) printf("seven");
+    else if (n == 8) printf("eight");
+    else if (n == 9) printf("nine");
+    else printf("Greater than 9");
+
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int a, b;
+    scanf("%d", &a);
+    scanf("%d", &b);
+
+    for (int i = a; i <= b; i++) {
+        if (i == 1) printf("one\n");
+        else if (i == 2) printf("two\n");
+        else if (i == 3) printf("three\n");
+        else if (i == 4) printf("four\n");
+        else if (i == 5) printf("five\n");
+        else if (i == 6) printf("six\n");
+        else if (i == 7) printf("seven\n");
+        else if (i == 8) printf("eight\n");
+        else if (i == 9) printf("nine\n");
+        else {
+            if (i % 2 == 0)
+                printf("even\n");
+            else
+                printf("odd\n");
+        }
+    }
+
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n, sum = 0;
+
+    scanf("%d", &n);
+
+    // Extract digits and add them
+    sum += n % 10; n /= 10;
+    sum += n % 10; n /= 10;
+    sum += n % 10; n /= 10;
+    sum += n % 10; n /= 10;
+    sum += n % 10;
+
+    printf("%d", sum);
+
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+
+    int max_and = 0;
+    int max_or = 0;
+    int max_xor = 0;
+
+    for (int a = 1; a <= n; a++) {
+        for (int b = a + 1; b <= n; b++) {
+            int aand = a & b;
+            int aor  = a | b;
+            int axor = a ^ b;
+
+            if (aand < k && aand > max_and)
+                max_and = aand;
+
+            if (aor < k && aor > max_or)
+                max_or = aor;
+
+            if (axor < k && axor > max_xor)
+                max_xor = axor;
+        }
+    }
+
+    printf("%d\n%d\n%d\n", max_and, max_or, max_xor);
+
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int size = 2 * n - 1;
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+
+            int top = i;
+            int left = j;
+            int right = size - 1 - j;
+            int bottom = size - 1 - i;
+
+            int layer = top;
+            if (left < layer) layer = left;
+            if (right < layer) layer = right;
+            if (bottom < layer) layer = bottom;
+
+            printf("%d ", n - layer);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);  // read the number of elements
+
+    int arr[n];        // declare array of size n
+    int sum = 0;
+
+    // read n integers
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+        sum += arr[i]; // accumulate sum
+    }
+
+    // print the sum
+    printf("%d\n", sum);
+
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);  // read size of array
+
+    int arr[n];
+
+    // read array elements
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // print array in reverse order
+    for(int i = n - 1; i >= 0; i--) {
+        printf("%d", arr[i]);
+        if (i > 0) printf(" ");  // print space except after last element
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    char *s;
+    s = malloc(1024 * sizeof(char));
+    scanf("%[^\n]", s);
+    s = realloc(s, strlen(s) + 1);
+    //Write your logic to print the tokens of the sentence here.
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * This stores the total number of books in each shelf.
+ */
+int* total_number_of_books;
+
+/*
+ * This stores the total number of pages in each book of each shelf.
+ * The rows represent the shelves and the columns represent the books.
+ */
+int** total_number_of_pages;
+int main() {
+
+    int total_number_of_shelves;
+    scanf("%d", &total_number_of_shelves);
+
+    int total_number_of_queries;
+    scanf("%d", &total_number_of_queries);
+
+    total_number_of_books = calloc(total_number_of_shelves, sizeof(int));
+    total_number_of_pages = malloc(total_number_of_shelves * sizeof(int*));
+
+    for(int i = 0; i < total_number_of_shelves; i++){
+        total_number_of_pages[i] = malloc(1100 * sizeof(int)); // max 1100 books per shelf
+    }
+
+    while (total_number_of_queries--) {
+        
+        int type_of_query;
+        scanf("%d", &type_of_query);
+
+        if (type_of_query == 1) {
+            int x, y;
+            scanf("%d %d", &x, &y);
+
+            int index = total_number_of_books[x];           // next empty slot
+            total_number_of_pages[x][index] = y;            // store pages
+            total_number_of_books[x]++;                     // update count
+            // -------------------
+
+        } else if (type_of_query == 2) {
+            int x, y;
+            scanf("%d %d", &x, &y);
+            printf("%d\n", *(*(total_number_of_pages + x) + y));
+        } else {
+            int x;
+            scanf("%d", &x);
+            printf("%d\n", *(total_number_of_books + x));
+        }
+    }
+
+    if (total_number_of_books) {
+        free(total_number_of_books);
+    }
+    
+    for (int i = 0; i < total_number_of_shelves; i++) {
+        if (*(total_number_of_pages + i)) {
+            free(*(total_number_of_pages + i));
+        }
+    }
+    
+    if (total_number_of_pages) {
+        free(total_number_of_pages);
+    }
+    
+    return 0;
+}
+
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n, a, b, c;
+    scanf("%d %d %d %d", &n, &a, &b, &c);
+
+    int t1 = a, t2 = b, t3 = c, t_next;
+
+    if (n == 1) {
+        printf("%d\n", t1);
+        return 0;
+    } else if (n == 2) {
+        printf("%d\n", t2);
+        return 0;
+    } else if (n == 3) {
+        printf("%d\n", t3);
+        return 0;
+    }
+
+    for (int i = 4; i <= n; i++) {
+        t_next = t1 + t2 + t3;
+        t1 = t2;
+        t2 = t3;
+        t3 = t_next;
+    }
+
+    printf("%d\n", t3);
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int marks_summation(int *marks, int number_of_students, char gender) {
+    int sum = 0;
+    int start_index = (gender == 'b') ? 0 : 1;  // Boys at 0, girls at 1
+
+    for (int i = start_index; i < number_of_students; i += 2) {
+        sum += marks[i];
+    }
+
+    return sum;
+}
+     
+int main() {
+    int number_of_students;
+    char gender;
+    int sum;
+  
+    scanf("%d", &number_of_students);
+    int *marks = (int *) malloc(number_of_students * sizeof (int));
+ 
+    for (int student = 0; student < number_of_students; student++) {
+        scanf("%d", (marks + student));
+    }
+    
+    scanf(" %c", &gender);
+    sum = marks_summation(marks, number_of_students, gender);
+    printf("%d", sum);
+    free(marks);
+ 
+    return 0;
+}
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+void swap(char **a, char **b) {
+    char *tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+// Reverse a subarray of strings from start to end
+void reverse(char **arr, int start, int end) {
+    while (start < end) {
+        swap(&arr[start], &arr[end]);
+        start++;
+        end--;
+    }
+}
+
+// Generate the next lexicographical permutation
+int next_permutation(int n, char **arr) {
+    int i = n - 2;
+    while (i >= 0 && strcmp(arr[i], arr[i + 1]) >= 0)
+        i--;
+    if (i < 0) return 0; // last permutation reached
+
+    int j = n - 1;
+    while (strcmp(arr[j], arr[i]) <= 0)
+        j--;
+
+    swap(&arr[i], &arr[j]);
+    reverse(arr, i + 1, n - 1);
+    return 1;
+}
+
+// Comparison function for qsort
+int cmpstr(const void *a, const void *b) {
+    return strcmp(*(char **)a, *(char **)b);
+}
+
+int main()
+{
+	char **s;
+	int n;
+	scanf("%d", &n);
+	s = calloc(n, sizeof(char*));
+	for (int i = 0; i < n; i++)
+	{
+		s[i] = calloc(11, sizeof(char));
+		scanf("%s", s[i]);
+	}
+	do
+	{
+		for (int i = 0; i < n; i++)
+			printf("%s%c", s[i], i == n - 1 ? '\n' : ' ');
+	} while (next_permutation(n, s));
+	for (int i = 0; i < n; i++)
+		free(s[i]);
+	free(s);
+	return 0;
+}
+
+
+
+
+
+
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define MIN_ELEMENT 1
+#define MAX_ELEMENT 1000000
+
+int sum(int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    int total = 0;
+    for (int i = 0; i < count; i++) {
+        total += va_arg(args, int);
+    }
+
+    va_end(args);
+    return total;
+}
+
+int min(int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    int minimum = va_arg(args, int);
+    for (int i = 1; i < count; i++) {
+        int value = va_arg(args, int);
+        if (value < minimum) minimum = value;
+    }
+
+    va_end(args);
+    return minimum;
+}
+
+int max(int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    int maximum = va_arg(args, int);
+    for (int i = 1; i < count; i++) {
+        int value = va_arg(args, int);
+        if (value > maximum) maximum = value;
+    }
+
+    va_end(args);
+    return maximum;
+}
+
+
+int test_implementations_by_sending_three_elements() {
+    srand(time(NULL));
+    
+    int elements[3];
+    
+    elements[0] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[1] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[2] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    
+    fprintf(stderr, "Sending following three elements:\n");
+    for (int i = 0; i < 3; i++) {
+        fprintf(stderr, "%d\n", elements[i]);
+    }
+    
+    int elements_sum = sum(3, elements[0], elements[1], elements[2]);
+    int minimum_element = min(3, elements[0], elements[1], elements[2]);
+    int maximum_element = max(3, elements[0], elements[1], elements[2]);
+
+    fprintf(stderr, "Your output is:\n");
+    fprintf(stderr, "Elements sum is %d\n", elements_sum);
+    fprintf(stderr, "Minimum element is %d\n", minimum_element);
+    fprintf(stderr, "Maximum element is %d\n\n", maximum_element);
+    
+    int expected_elements_sum = 0;
+    for (int i = 0; i < 3; i++) {
+        if (elements[i] < minimum_element) {
+            return 0;
+        }
+        
+        if (elements[i] > maximum_element) {
+            return 0;
+        }
+        
+        expected_elements_sum += elements[i];
+    }
+    
+    return elements_sum == expected_elements_sum;
+}
+
+int test_implementations_by_sending_five_elements() {
+    srand(time(NULL));
+    
+    int elements[5];
+    
+    elements[0] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[1] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[2] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[3] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[4] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    
+    fprintf(stderr, "Sending following five elements:\n");
+    for (int i = 0; i < 5; i++) {
+        fprintf(stderr, "%d\n", elements[i]);
+    }
+    
+    int elements_sum = sum(5, elements[0], elements[1], elements[2], elements[3], elements[4]);
+    int minimum_element = min(5, elements[0], elements[1], elements[2], elements[3], elements[4]);
+    int maximum_element = max(5, elements[0], elements[1], elements[2], elements[3], elements[4]);
+    
+    fprintf(stderr, "Your output is:\n");
+    fprintf(stderr, "Elements sum is %d\n", elements_sum);
+    fprintf(stderr, "Minimum element is %d\n", minimum_element);
+    fprintf(stderr, "Maximum element is %d\n\n", maximum_element);
+    
+    int expected_elements_sum = 0;
+    for (int i = 0; i < 5; i++) {
+        if (elements[i] < minimum_element) {
+            return 0;
+        }
+        
+        if (elements[i] > maximum_element) {
+            return 0;
+        }
+        
+        expected_elements_sum += elements[i];
+    }
+    
+    return elements_sum == expected_elements_sum;
+}
+
+int test_implementations_by_sending_ten_elements() {
+    srand(time(NULL));
+    
+    int elements[10];
+    
+    elements[0] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[1] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[2] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[3] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[4] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[5] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[6] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[7] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[8] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[9] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    
+    fprintf(stderr, "Sending following ten elements:\n");
+    for (int i = 0; i < 10; i++) {
+        fprintf(stderr, "%d\n", elements[i]);
+    }
+    
+    int elements_sum = sum(10, elements[0], elements[1], elements[2], elements[3], elements[4],
+                           elements[5], elements[6], elements[7], elements[8], elements[9]);
+    int minimum_element = min(10, elements[0], elements[1], elements[2], elements[3], elements[4],
+                           elements[5], elements[6], elements[7], elements[8], elements[9]);
+    int maximum_element = max(10, elements[0], elements[1], elements[2], elements[3], elements[4],
+                           elements[5], elements[6], elements[7], elements[8], elements[9]);
+    
+    fprintf(stderr, "Your output is:\n");
+    fprintf(stderr, "Elements sum is %d\n", elements_sum);
+    fprintf(stderr, "Minimum element is %d\n", minimum_element);
+    fprintf(stderr, "Maximum element is %d\n\n", maximum_element);
+    
+    int expected_elements_sum = 0;
+    for (int i = 0; i < 10; i++) {
+        if (elements[i] < minimum_element) {
+            return 0;
+        }
+        
+        if (elements[i] > maximum_element) {
+            return 0;
+        }
+        
+        expected_elements_sum += elements[i];
+    }
+    
+    return elements_sum == expected_elements_sum;
+}
+
+int main ()
+{
+    int number_of_test_cases;
+    scanf("%d", &number_of_test_cases);
+    
+    while (number_of_test_cases--) {
+        if (test_implementations_by_sending_three_elements()) {
+            printf("Correct Answer\n");
+        } else {
+            printf("Wrong Answer\n");
+        }
+        
+        if (test_implementations_by_sending_five_elements()) {
+            printf("Correct Answer\n");
+        } else {
+            printf("Wrong Answer\n");
+        }
+        
+        if (test_implementations_by_sending_ten_elements()) {
+            printf("Correct Answer\n");
+        } else {
+            printf("Wrong Answer\n");
+        }
+    }
+    
+    return 0;
+}
+
+
+
+
+
+
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define MIN_ELEMENT 1
+#define MAX_ELEMENT 1000000
+
+int sum(int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    int total = 0;
+    for (int i = 0; i < count; i++) {
+        total += va_arg(args, int);
+    }
+
+    va_end(args);
+    return total;
+}
+
+int min(int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    int minimum = va_arg(args, int);
+    for (int i = 1; i < count; i++) {
+        int value = va_arg(args, int);
+        if (value < minimum) minimum = value;
+    }
+
+    va_end(args);
+    return minimum;
+}
+
+int max(int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    int maximum = va_arg(args, int);
+    for (int i = 1; i < count; i++) {
+        int value = va_arg(args, int);
+        if (value > maximum) maximum = value;
+    }
+
+    va_end(args);
+    return maximum;
+}
+
+
+int test_implementations_by_sending_three_elements() {
+    srand(time(NULL));
+    
+    int elements[3];
+    
+    elements[0] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[1] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[2] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    
+    fprintf(stderr, "Sending following three elements:\n");
+    for (int i = 0; i < 3; i++) {
+        fprintf(stderr, "%d\n", elements[i]);
+    }
+    
+    int elements_sum = sum(3, elements[0], elements[1], elements[2]);
+    int minimum_element = min(3, elements[0], elements[1], elements[2]);
+    int maximum_element = max(3, elements[0], elements[1], elements[2]);
+
+    fprintf(stderr, "Your output is:\n");
+    fprintf(stderr, "Elements sum is %d\n", elements_sum);
+    fprintf(stderr, "Minimum element is %d\n", minimum_element);
+    fprintf(stderr, "Maximum element is %d\n\n", maximum_element);
+    
+    int expected_elements_sum = 0;
+    for (int i = 0; i < 3; i++) {
+        if (elements[i] < minimum_element) {
+            return 0;
+        }
+        
+        if (elements[i] > maximum_element) {
+            return 0;
+        }
+        
+        expected_elements_sum += elements[i];
+    }
+    
+    return elements_sum == expected_elements_sum;
+}
+
+int test_implementations_by_sending_five_elements() {
+    srand(time(NULL));
+    
+    int elements[5];
+    
+    elements[0] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[1] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[2] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[3] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[4] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    
+    fprintf(stderr, "Sending following five elements:\n");
+    for (int i = 0; i < 5; i++) {
+        fprintf(stderr, "%d\n", elements[i]);
+    }
+    
+    int elements_sum = sum(5, elements[0], elements[1], elements[2], elements[3], elements[4]);
+    int minimum_element = min(5, elements[0], elements[1], elements[2], elements[3], elements[4]);
+    int maximum_element = max(5, elements[0], elements[1], elements[2], elements[3], elements[4]);
+    
+    fprintf(stderr, "Your output is:\n");
+    fprintf(stderr, "Elements sum is %d\n", elements_sum);
+    fprintf(stderr, "Minimum element is %d\n", minimum_element);
+    fprintf(stderr, "Maximum element is %d\n\n", maximum_element);
+    
+    int expected_elements_sum = 0;
+    for (int i = 0; i < 5; i++) {
+        if (elements[i] < minimum_element) {
+            return 0;
+        }
+        
+        if (elements[i] > maximum_element) {
+            return 0;
+        }
+        
+        expected_elements_sum += elements[i];
+    }
+    
+    return elements_sum == expected_elements_sum;
+}
+
+int test_implementations_by_sending_ten_elements() {
+    srand(time(NULL));
+    
+    int elements[10];
+    
+    elements[0] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[1] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[2] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[3] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[4] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[5] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[6] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[7] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[8] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    elements[9] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) + MIN_ELEMENT;
+    
+    fprintf(stderr, "Sending following ten elements:\n");
+    for (int i = 0; i < 10; i++) {
+        fprintf(stderr, "%d\n", elements[i]);
+    }
+    
+    int elements_sum = sum(10, elements[0], elements[1], elements[2], elements[3], elements[4],
+                           elements[5], elements[6], elements[7], elements[8], elements[9]);
+    int minimum_element = min(10, elements[0], elements[1], elements[2], elements[3], elements[4],
+                           elements[5], elements[6], elements[7], elements[8], elements[9]);
+    int maximum_element = max(10, elements[0], elements[1], elements[2], elements[3], elements[4],
+                           elements[5], elements[6], elements[7], elements[8], elements[9]);
+    
+    fprintf(stderr, "Your output is:\n");
+    fprintf(stderr, "Elements sum is %d\n", elements_sum);
+    fprintf(stderr, "Minimum element is %d\n", minimum_element);
+    fprintf(stderr, "Maximum element is %d\n\n", maximum_element);
+    
+    int expected_elements_sum = 0;
+    for (int i = 0; i < 10; i++) {
+        if (elements[i] < minimum_element) {
+            return 0;
+        }
+        
+        if (elements[i] > maximum_element) {
+            return 0;
+        }
+        
+        expected_elements_sum += elements[i];
+    }
+    
+    return elements_sum == expected_elements_sum;
+}
+
+int main ()
+{
+    int number_of_test_cases;
+    scanf("%d", &number_of_test_cases);
+    
+    while (number_of_test_cases--) {
+        if (test_implementations_by_sending_three_elements()) {
+            printf("Correct Answer\n");
+        } else {
+            printf("Wrong Answer\n");
+        }
+        
+        if (test_implementations_by_sending_five_elements()) {
+            printf("Correct Answer\n");
+        } else {
+            printf("Wrong Answer\n");
+        }
+        
+        if (test_implementations_by_sending_ten_elements()) {
+            printf("Correct Answer\n");
+        } else {
+            printf("Wrong Answer\n");
+        }
+    }
+    
+    return 0;
+}
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_HEIGHT 41
+
+
+typedef struct {
+    int length;
+    int width;
+    int height;
+} box;
+
+int get_volume(box b) {
+    return b.length * b.width * b.height;
+}
+
+int is_lower_than_max_height(box b) {
+    return b.height < MAX_HEIGHT;  // Strictly less than max height
+}
+
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	box *boxes = malloc(n * sizeof(box));
+	for (int i = 0; i < n; i++) {
+		scanf("%d%d%d", &boxes[i].length, &boxes[i].width, &boxes[i].height);
+	}
+	for (int i = 0; i < n; i++) {
+		if (is_lower_than_max_height(boxes[i])) {
+			printf("%d\n", get_volume(boxes[i]));
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+struct triangle
+{
+	int a;
+	int b;
+	int c;
+};
+
+typedef struct triangle triangle;
+double heron(int a, int b, int c) {
+    double s = (a + b + c) / 2.0;
+    return sqrt(s * (s - a) * (s - b) * (s - c));
+}
+
+void sort_by_area(triangle* tr, int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (heron(tr[j].a, tr[j].b, tr[j].c) > heron(tr[j + 1].a, tr[j + 1].b, tr[j + 1].c)) {
+                triangle temp = tr[j];
+                tr[j] = tr[j + 1];
+                tr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	triangle *tr = malloc(n * sizeof(triangle));
+	for (int i = 0; i < n; i++) {
+		scanf("%d%d%d", &tr[i].a, &tr[i].b, &tr[i].c);
+	}
+	sort_by_area(tr, n);
+	for (int i = 0; i < n; i++) {
+		printf("%d %d %d\n", tr[i].a, tr[i].b, tr[i].c);
+	}
+	return 0;
+}
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct package {
+    char id[100];
+    int weight;
+} package;
+
+typedef struct post_office {
+    int min_weight, max_weight;
+    int packages_count;
+    package* packages;
+} post_office;
+
+typedef struct town {
+    char name[100];
+    int offices_count;
+    post_office* offices;
+} town;
+
+// PRINT ALL PACKAGES OF A TOWN
+void print_all_packages(town t) {
+    printf("%s:", t.name);
+    for (int i = 0; i < t.offices_count; i++) {
+        printf(" %d:", i);
+        for (int j = 0; j < t.offices[i].packages_count; j++) {
+            printf(" %s", t.offices[i].packages[j].id);
+        }
+    }
+    printf("\n");
+}
+
+// SEND PACKAGES BETWEEN TWO POST OFFICES
+void send_all_acceptable_packages(town* t1, int o1, town* t2, int o2) {
+    post_office* src = &t1->offices[o1];
+    post_office* dest = &t2->offices[o2];
+
+    package* returned = malloc(src->packages_count * sizeof(package));
+    int rCount = 0;
+
+    for (int i = 0; i < src->packages_count; i++) {
+        package p = src->packages[i];
+        if (p.weight >= dest->min_weight && p.weight <= dest->max_weight) {
+            dest->packages = realloc(dest->packages, (dest->packages_count + 1) * sizeof(package));
+            dest->packages[dest->packages_count++] = p;
+        } else {
+            returned[rCount++] = p;
+        }
+    }
+
+    src->packages = realloc(src->packages, rCount * sizeof(package));
+    src->packages_count = rCount;
+    for (int i = 0; i < rCount; i++)
+        src->packages[i] = returned[i];
+
+    free(returned);
+}
+
+// FIND TOWN WITH MOST TOTAL PACKAGES
+town* town_with_most_packages(town* towns, int n) {
+    int max = -1;
+    town* res = &towns[0];
+    for (int i = 0; i < n; i++) {
+        int total = 0;
+        for (int j = 0; j < towns[i].offices_count; j++)
+            total += towns[i].offices[j].packages_count;
+        if (total > max) {
+            max = total;
+            res = &towns[i];
+        }
+    }
+    return res;
+}
+
+// FIND TOWN BY NAME
+town* find_town(town* towns, int n, char* name) {
+    for (int i = 0; i < n; i++)
+        if (strcmp(towns[i].name, name) == 0)
+            return &towns[i];
+    return NULL;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    town* towns = malloc(n * sizeof(town));
+
+    for (int i = 0; i < n; i++) {
+        scanf("%s", towns[i].name);
+        scanf("%d", &towns[i].offices_count);
+
+        towns[i].offices = malloc(towns[i].offices_count * sizeof(post_office));
+
+        for (int j = 0; j < towns[i].offices_count; j++) {
+            int k;
+            scanf("%d %d %d", &k, &towns[i].offices[j].min_weight, &towns[i].offices[j].max_weight);
+            towns[i].offices[j].packages_count = k;
+            towns[i].offices[j].packages = malloc(k * sizeof(package));
+
+            for (int p = 0; p < k; p++) {
+                scanf("%s %d", towns[i].offices[j].packages[p].id, &towns[i].offices[j].packages[p].weight);
+            }
+        }
+    }
+
+    int q;
+    scanf("%d", &q);
+
+    while (q--) {
+        int type;
+        scanf("%d", &type);
+
+        if (type == 1) {
+            char name[100];
+            scanf("%s", name);
+            print_all_packages(*find_town(towns, n, name));
+        } else if (type == 2) {
+            char t1[100], t2[100];
+            int o1, o2;
+            scanf("%s %d %s %d", t1, &o1, t2, &o2);
+            send_all_acceptable_packages(find_town(towns, n, t1), o1, find_town(towns, n, t2), o2);
+        } else if (type == 3) {
+            town* res = town_with_most_packages(towns, n);
+            printf("Town with the most number of packages is %s\n", res->name);
+        }
+    }
+
+    // Free memory
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < towns[i].offices_count; j++)
+            free(towns[i].offices[j].packages);
+        free(towns[i].offices);
+    }
+    free(towns);
+
+    return 0;
+}
+
+
+    
+
